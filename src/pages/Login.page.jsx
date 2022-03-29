@@ -1,24 +1,48 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { Controller, useForm } from 'react-hook-form';
+import DefaultInput from '../components/DefaultInput';
 
 const LoginPage = () => {
-  const navigate = useNavigate;
+  const { handleSubmit, control } = useForm({
+    defaultValues: {
+      email: 'teste@teste.com',
+      password: '123',
+    },
+  });
 
-  const handleOnSubmit = (event) => {
-    event.preventDefault();
-    console.log('Login efetuado');
-    navigate('/lobby');
+  const onSubmit = (data) => {
+    console.log(data);
   };
 
+  return (
     <div>
       <h1>Login</h1>
-      <form onSubmit={handleOnSubmit}>
-        <input type="text" name="Nome" />
-        <input type="text" name="E-mail" />
-        <input type="password" name="Password" />
-        <button type="submit">Login</button>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Controller
+          control={control}
+          name="email"
+          render={({ field }) => {
+            const { name, onChange, value } = field;
+            return (
+              <DefaultInput name={name} onChange={onChange} value={value} />
+            );
+          }}
+        />
+        <Controller
+          control={control}
+          name="password"
+          render={({ field }) => {
+            const { name, onChange, value } = field;
+            return (
+              <DefaultInput name={name} onChange={onChange} value={value} type="password" />
+            );
+          }}
+        />
+        <button type="submit">Entrar</button>
       </form>
       <Link to="/register">Não possui uma conta? Cadastre-se</Link>
-    </div>;
+    </div>
+  );
 };
 
 export default LoginPage;
