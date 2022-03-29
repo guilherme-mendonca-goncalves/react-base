@@ -1,1 +1,1 @@
-export { default as fake } from './fake';
+export { fake } from './fake';
