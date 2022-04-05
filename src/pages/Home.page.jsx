@@ -1,16 +1,16 @@
 import { Link } from 'react-router-dom';
+import { Header } from '../components';
 
 const HomePage = () => (
   <div>
+    <Header />
     <h1>Home</h1>
-    <ul>
-      <li>
-        <Link to="/login">Login</Link>
-      </li>
-      <li>
-        <Link to="/register">Register</Link>
-      </li>
-    </ul>
+    <div>
+      <Link to="/login">Login</Link>
+    </div>
+    <div>
+      <Link to="/register">Register</Link>
+    </div>
   </div>
 );
 
